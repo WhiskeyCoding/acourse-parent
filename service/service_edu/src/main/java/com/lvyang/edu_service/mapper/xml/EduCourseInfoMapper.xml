@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lvyang.edu_service.mapper.EduCourseInfoMapper">
+    <!--SQL:根据课程Id查询课程确认信息-->
+    <select id="getPublishCourseInfo" resultType="com.lvyang.edu_service.entity.vo.CoursePublishVO">
+		SELECT
+			eci.id,
+			eci.title,
+			eci.lesson_num AS lessonNum,
+			es1.title AS subjectLevelOne,
+			es2.title AS subjectLevelTwo,
+			et.NAME AS teacherName,
+			ecd.description,
+			eci.cover,
+			eci.price
+		FROM
+			edu_course_info eci
+			LEFT JOIN edu_course_description ecd ON eci.id = ecd.id
+			LEFT JOIN edu_teacher et ON eci.teacher_id = et.id
+			LEFT JOIN edu_subject es1 ON eci.subject_parent_id = es1.id
+			LEFT JOIN edu_subject es2 ON eci.subject_id = es2.id
+		WHERE
+			eci.id = #{courseId}
+    </select>
+</mapper>
