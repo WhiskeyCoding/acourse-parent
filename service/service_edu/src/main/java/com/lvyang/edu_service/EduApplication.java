@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Date: 2020/11/25 9:12
  * @Version: 1.0
  */
-//TODO 注解
+
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.lvyang"})
 @EnableDiscoveryClient//nacos服务中心注册
