@@ -20,9 +20,9 @@ import java.util.List;
  * @author lvyang
  * @since 2020-12-20
  */
-@CrossOrigin
 @RestController
 @RequestMapping("/cms_service/cms_banner_admin")
+@CrossOrigin
 public class CmsBannerAdminController {
     /**
      * 注入CmsBannerService服务

@@ -36,8 +36,11 @@ public class EduTeacherController {
      * EduTeacherService
      * service 注入
      */
+    final EduTeacherService teacherService;
     @Autowired
-    private EduTeacherService teacherService;
+    private EduTeacherController(EduTeacherService teacherService){
+        this.teacherService = teacherService;
+    }
 
     /**
      * 1 查询讲师表所有数据(rest风格）
