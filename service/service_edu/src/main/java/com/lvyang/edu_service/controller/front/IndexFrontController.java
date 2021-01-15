@@ -7,6 +7,7 @@ import com.lvyang.edu_service.entity.EduTeacher;
 import com.lvyang.edu_service.service.EduCourseInfoService;
 import com.lvyang.edu_service.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import java.util.List;
  * @Date: 2021/1/15 11:20
  * @Version: 1.0
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/edu_service/indexfront")
 public class IndexFrontController {
@@ -43,14 +45,12 @@ public class IndexFrontController {
         wrapper.orderByDesc("id");
         wrapper.last("limit 8");
         List<EduCourseInfo> indexCourseList = eduCourseInfoService.list(wrapper);
-
-
         //查询前4条名师
         QueryWrapper<EduTeacher> wrapperTeacher = new QueryWrapper<>();
         wrapperTeacher.orderByDesc("id");
         wrapperTeacher.last("limit 4");
         List<EduTeacher> indexTeacherList = eduTeacherService.list(wrapperTeacher);
-
+        //返回结果
         return JsonResultUnity.correct().data("indexCourseList",indexCourseList).data("indexTeacherList",indexTeacherList);
 
     }
