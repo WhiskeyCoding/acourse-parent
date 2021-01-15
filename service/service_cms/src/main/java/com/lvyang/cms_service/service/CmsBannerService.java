@@ -3,6 +3,8 @@ package com.lvyang.cms_service.service;
 import com.lvyang.cms_service.entity.CmsBanner;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 首页banner表 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CmsBannerService extends IService<CmsBanner> {
 
+    List<CmsBanner> selectAllBanner();
 }
