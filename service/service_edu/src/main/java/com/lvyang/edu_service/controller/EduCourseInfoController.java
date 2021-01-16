@@ -80,6 +80,7 @@ public class EduCourseInfoController {
         EduCourseInfo eduCourseInfo = new EduCourseInfo();
         eduCourseInfo.setId(courseId);
         eduCourseInfo.setStatus("Normal");
+        eduCourseInfo.setIsDeleted(0);
         eduCourseInfoService.updateById(eduCourseInfo);
         return JsonResultUnity.correct();
     }

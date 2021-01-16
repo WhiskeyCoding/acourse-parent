@@ -45,6 +45,7 @@ public class EduCourseInfoServiceImpl extends ServiceImpl<EduCourseInfoMapper, E
         EduCourseInfo eduCourseInfo = new EduCourseInfo();
         BeanUtils.copyProperties(courseInfoVO,eduCourseInfo);
         int insert = baseMapper.insert(eduCourseInfo);//影响行数
+        eduCourseInfo.setIsDeleted(0);
         if(insert==0){
             //添加失败
             throw new ACourseException(20001, "添加课程信息失败");
