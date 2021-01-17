@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>dd
+ * <p>
  * 首页banner表 前端控制器
  * </p>
  *
