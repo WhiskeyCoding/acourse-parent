@@ -28,7 +28,7 @@ public class CmsBannerServiceImpl extends ServiceImpl<CmsBannerMapper, CmsBanner
         QueryWrapper<CmsBanner> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc("id");
         //last方法，拼接sql语句
-        wrapper.last("limit 2");
+        wrapper.last("limit 3");
         List<CmsBanner> cmsBanners = baseMapper.selectList(null);
         return cmsBanners;
     }
