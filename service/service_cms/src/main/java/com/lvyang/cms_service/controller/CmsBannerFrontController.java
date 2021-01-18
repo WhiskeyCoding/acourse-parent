@@ -36,11 +36,6 @@ public class CmsBannerFrontController {
      */
     @GetMapping("getAllBanner")
     public JsonResultUnity getAllBanner(){
-        //根据Id进行降序排列，显示排列之后的前两条记录
-        QueryWrapper<CmsBanner> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("id");
-        //last方法，拼接sql语句
-        wrapper.last("limit 2");
         List<CmsBanner> bannerList = cmsBannerService.selectAllBanner();
         return JsonResultUnity.correct().data("bannerList", bannerList);
     }
