@@ -32,7 +32,7 @@ public class MsmTransactionController {
     }
 
     /**
-     * 发送注册短信的方法
+     * 1.发送注册短信验证码的方法
      */
     @GetMapping("sendRegisterMessage/{cellPhoneNumber}")
     public JsonResultUnity sendRegisterMessage(@PathVariable String cellPhoneNumber) {
@@ -54,6 +54,31 @@ public class MsmTransactionController {
             return JsonResultUnity.correct().message("注册短信发送成功");
         } else {
             return JsonResultUnity.error().message("注册短信发送失败");
+        }
+    }
+    /**
+     * 2.发送登录短信验证码的方法
+     */
+    @GetMapping("sendLoginMessage/{cellPhoneNumber}")
+    public JsonResultUnity sendLoginMessage(@PathVariable String cellPhoneNumber) {
+        //1 从Redis获取验证码，如果获取到直接取回
+        String smsLoginCode = redisTemplate.opsForValue().get(cellPhoneNumber);
+        if(!StringUtils.isEmpty(smsLoginCode)){
+            return JsonResultUnity.correct();
+        }
+        //2 如果Redis获取不到，进行阿里云
+        //生成随机值，传递阿里云进行发送
+        smsLoginCode = SMSRandomUtil.getSixBitRandom();
+        Map<String, Object> smsParam = new HashMap<>();
+        smsParam.put("code", smsLoginCode);
+        //调用Service中短信发送方法
+        boolean isSend = msmTransactionService.sendLoginShortMessage(cellPhoneNumber, smsParam);
+        if (isSend) {
+            //发送成功，把发送成功验证码放到Redis里面，设置有效时间
+            redisTemplate.opsForValue().set(cellPhoneNumber,smsLoginCode,5, TimeUnit.MINUTES);
+            return JsonResultUnity.correct().message("登录短信发送成功");
+        } else {
+            return JsonResultUnity.error().message("登录短信发送失败");
         }
     }
 }

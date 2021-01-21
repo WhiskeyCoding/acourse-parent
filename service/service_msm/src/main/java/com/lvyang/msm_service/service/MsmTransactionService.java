@@ -11,4 +11,6 @@ import java.util.Map;
 public interface MsmTransactionService {
 
     boolean sendRegisterShortMessage(String cellPhoneNumber, Map<String, Object> smsParam);
+
+    boolean sendLoginShortMessage(String cellPhoneNumber, Map<String, Object> smsParam);
 }

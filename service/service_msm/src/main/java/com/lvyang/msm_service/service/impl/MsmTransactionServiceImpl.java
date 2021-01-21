@@ -68,6 +68,50 @@ public class MsmTransactionServiceImpl implements MsmTransactionService {
         }
         return false;
     }
+
+    /**
+     * 发送登录短信方法
+     * @param cellPhoneNumber
+     * @param smsParam
+     * @return
+     */
+    @Override
+    public boolean sendLoginShortMessage(String cellPhoneNumber, Map<String, Object> smsParam) {
+        if (StringUtils.isEmpty(cellPhoneNumber)) {
+            return false;
+        }
+
+        DefaultProfile profile = DefaultProfile.getProfile("default", "LTAI4Fy13keirDJT2uiPK2Ez", "c0sTUVJEH0CzM94xMi0I176oxkB8zN");
+        IAcsClient client = new DefaultAcsClient(profile);
+
+        //设置相关固定参数
+        CommonRequest request = new CommonRequest();
+        //request.setProtocol(ProtocolType.HTTPS);
+        request.setSysMethod(MethodType.POST);
+        request.setSysDomain("dysmsapi.aliyuncs.com");
+        request.setSysVersion("2017-05-25");
+        request.setSysAction("SendSms");
+
+        //设置发送的相关参数
+        request.putQueryParameter("PhoneNumbers", cellPhoneNumber);//手机号
+        request.putQueryParameter("SignName", "咚文洋我的在线教育网站");//申请签名名称
+        request.putQueryParameter("TemplateCode", "SMS_209822559");
+        request.putQueryParameter("TemplateParam", JSONObject.toJSONString(smsParam));
+
+
+        try {
+            //最终发送
+            CommonResponse response = client.getCommonResponse(request);
+            System.out.println(response.getData());
+            boolean success = response.getHttpResponse().isSuccess();
+            return success;
+        } catch (ServerException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
 
 
