@@ -47,7 +47,7 @@ public class IndexFrontController {
         List<EduCourseInfo> indexCourseList = eduCourseInfoService.list(wrapper);
         //查询前4条名师
         QueryWrapper<EduTeacher> wrapperTeacher = new QueryWrapper<>();
-        wrapperTeacher.orderByDesc("id");
+        wrapperTeacher.orderByDesc("level");
         wrapperTeacher.last("limit 4");
         List<EduTeacher> indexTeacherList = eduTeacherService.list(wrapperTeacher);
         //返回结果
