@@ -1,8 +1,12 @@
 package com.lvyang.portal_service.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @Author: lvyang
@@ -13,6 +17,12 @@ import lombok.Data;
 @Data
 @ApiModel(value="登录对象信息", description="登录对象信息")
 public class LoginInfoVO {
+    @ApiModelProperty(value = "会员id")
+    private String id;
+
+    @ApiModelProperty(value = "微信openid")
+    private String openid;
+
     @ApiModelProperty(value = "用户名昵称")
     private String nickname;
 
@@ -31,4 +41,6 @@ public class LoginInfoVO {
     @ApiModelProperty(value = "用户签名")
     private String sign;
 
+    @ApiModelProperty(value = "创建时间")
+    private Date gmtCreate;
 }

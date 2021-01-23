@@ -11,6 +11,7 @@ import com.lvyang.portal_service.mapper.PortalMemberMapper;
 import com.lvyang.portal_service.service.PortalMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvyang.service_base.exceptionhandler.ACourseException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -63,7 +64,7 @@ public class PortalMemberServiceImpl extends ServiceImpl<PortalMemberMapper, Por
         member.setPassword(MD5.encrypt(password));
         member.setIsDisabled(false);
         member.setAvatar("DEFAULT_AVATAR");
-        member.setAge(-1);
+        member.setAge(0);
         member.setSex(0);
         member.setOpenid("DEFAULT_OPENID");
         member.setSign("DEFAULT_SIGN");
@@ -108,6 +109,9 @@ public class PortalMemberServiceImpl extends ServiceImpl<PortalMemberMapper, Por
 
     @Override
     public LoginInfoVO getLoginInfo(String memberId) {
-        return null;
+        PortalMember member = baseMapper.selectById(memberId);
+        LoginInfoVO loginInfoVO = new LoginInfoVO();
+        BeanUtils.copyProperties(member, loginInfoVO);
+        return loginInfoVO;
     }
 }
