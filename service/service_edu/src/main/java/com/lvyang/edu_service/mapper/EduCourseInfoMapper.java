@@ -2,6 +2,7 @@ package com.lvyang.edu_service.mapper;
 
 import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lvyang.edu_service.entity.vo.CourseFrontShowVO;
 import com.lvyang.edu_service.entity.vo.CoursePublishVO;
 
 /**
@@ -14,4 +15,6 @@ import com.lvyang.edu_service.entity.vo.CoursePublishVO;
  */
 public interface EduCourseInfoMapper extends BaseMapper<EduCourseInfo> {
     public CoursePublishVO getPublishCourseInfo(String courseId);
+
+    public CourseFrontShowVO getCourseBaseInfo(String courseId);
 }

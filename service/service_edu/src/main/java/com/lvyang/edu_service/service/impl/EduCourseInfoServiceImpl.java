@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvyang.edu_service.entity.EduCourseDescription;
 import com.lvyang.edu_service.entity.EduCourseInfo;
+import com.lvyang.edu_service.entity.vo.CourseFrontShowVO;
 import com.lvyang.edu_service.entity.vo.CourseFrontVO;
 import com.lvyang.edu_service.entity.vo.CourseInfoVO;
 import com.lvyang.edu_service.entity.vo.CoursePublishVO;
@@ -170,6 +171,12 @@ public class EduCourseInfoServiceImpl extends ServiceImpl<EduCourseInfoMapper, E
         } else {
             return map;
         }
+    }
+
+    @Override
+    public CourseFrontShowVO getCourseBaseInfo(String courseId) {
+        CourseFrontShowVO courseBaseInfo = baseMapper.getCourseBaseInfo(courseId);
+        return courseBaseInfo;
     }
 
 }

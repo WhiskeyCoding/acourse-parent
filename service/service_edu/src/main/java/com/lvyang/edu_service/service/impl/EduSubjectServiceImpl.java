@@ -80,8 +80,6 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
             oneSubject.setChildren(twoFinalSubjectList);
         }
         //封装二级分类
-        
-
         return finalSubjectList;
     }
 }

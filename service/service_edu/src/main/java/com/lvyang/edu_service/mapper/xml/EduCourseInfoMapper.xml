@@ -22,4 +22,33 @@
 		WHERE
 			eci.id = #{courseId}
     </select>
+
+	<!--SQL:根据课程Id查询课程基本信息-->
+	<select id="getCourseBaseInfo" resultType="com.lvyang.edu_service.entity.vo.CourseFrontShowVO">
+		SELECT
+			eci.id,
+			eci.title,
+			eci.lesson_num AS lessonNum,
+			eci.buy_count AS buyCount,
+			eci.view_count AS viewCount,
+			eci.cover,
+			eci.price,
+			es1.id AS subjectLevelOneId,
+			es1.title AS subjectLevelOne,
+			es2.id AS subjectLevelTwoId,
+			es2.title AS subjectLevelTwo,
+			et.id AS teacherId,
+			et.NAME AS teacherName,
+			et.intro,
+			et.avatar,
+			ecd.description
+		FROM
+			edu_course_info eci
+			LEFT JOIN edu_course_description ecd ON eci.id = ecd.id
+			LEFT JOIN edu_teacher et ON eci.teacher_id = et.id
+			LEFT JOIN edu_subject es1 ON eci.subject_parent_id = es1.id
+			LEFT JOIN edu_subject es2 ON eci.subject_id = es2.id
+		WHERE
+			eci.id = #{courseId}
+	</select>
 </mapper>

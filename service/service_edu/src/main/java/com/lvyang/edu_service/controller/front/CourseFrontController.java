@@ -3,12 +3,17 @@ package com.lvyang.edu_service.controller.front;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.edu_service.entity.EduCourseInfo;
+import com.lvyang.edu_service.entity.cchapter.ChapterVO;
+import com.lvyang.edu_service.entity.vo.CourseFrontShowVO;
 import com.lvyang.edu_service.entity.vo.CourseFrontVO;
+import com.lvyang.edu_service.service.EduCourseChapterService;
 import com.lvyang.edu_service.service.EduCourseInfoService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,10 +27,11 @@ import java.util.Map;
 @CrossOrigin
 public class CourseFrontController {
     final EduCourseInfoService courseInfoService;
-
+    final EduCourseChapterService courseChapterService;
     @Autowired
-    private CourseFrontController(EduCourseInfoService courseInfoService) {
+    private CourseFrontController(EduCourseInfoService courseInfoService,EduCourseChapterService courseChapterService) {
         this.courseInfoService = courseInfoService;
+        this.courseChapterService = courseChapterService;
     }
 
     //1 条件查询带分页查询课程
@@ -43,5 +49,16 @@ public class CourseFrontController {
         } else {
             return JsonResultUnity.error().message("最后一页了。");
         }
+    }
+
+    //2 查询
+    @GetMapping("getFrontCourseInfo/{courseId}")
+    public JsonResultUnity getFrontCourseInfo(@PathVariable String courseId) {
+        //根据课程Id，编写sql语句查询课程信息
+        CourseFrontShowVO courseFrontShowVO = courseInfoService.getCourseBaseInfo(courseId);
+        //根据课程Id，查询章节和小节
+        List<ChapterVO> courseChapterTrainingInfo = courseChapterService.getCourseChapterTrainingByCourseId(courseId);
+
+        return JsonResultUnity.correct().data("courseFrontShowVO", courseFrontShowVO).data("courseChapterTrainingInfo", courseChapterTrainingInfo);
     }
 }

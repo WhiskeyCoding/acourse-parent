@@ -3,6 +3,7 @@ package com.lvyang.edu_service.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lvyang.edu_service.entity.vo.CourseFrontShowVO;
 import com.lvyang.edu_service.entity.vo.CourseFrontVO;
 import com.lvyang.edu_service.entity.vo.CourseInfoVO;
 import com.lvyang.edu_service.entity.vo.CoursePublishVO;
@@ -33,4 +34,6 @@ public interface EduCourseInfoService extends IService<EduCourseInfo> {
 
     //条件查询带分页前端课程
     Map<String, Object> getFrontCoursePageList(Page<EduCourseInfo> pageParam, CourseFrontVO courseFrontVO);
+
+    CourseFrontShowVO getCourseBaseInfo(String courseId);
 }
