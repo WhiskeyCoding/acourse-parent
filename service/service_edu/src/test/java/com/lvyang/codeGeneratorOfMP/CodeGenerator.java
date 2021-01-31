@@ -26,7 +26,7 @@ public class CodeGenerator {
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("D:\\Project\\JavaProject\\acourse-parent\\service\\service_edu" + "/src/main/java");
+        gc.setOutputDir("D:\\Project-dev\\acourse-parent\\service\\service_edu" + "/src/main/java");
         gc.setAuthor("lvyang");
         gc.setOpen(true); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
@@ -58,7 +58,7 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_course_info","edu_course_description","edu_course_chapter","edu_course_training");//数据库表名
+        strategy.setInclude("edu_user_comment");//数据库表名
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 

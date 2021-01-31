@@ -3,12 +3,16 @@ package com.lvyang.portal_service.controller;
 
 import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.common_utils.jwtutil.JwtUtils;
+import com.lvyang.portal_service.entity.PortalMember;
 import com.lvyang.portal_service.entity.vo.LoginInfoVO;
 import com.lvyang.portal_service.entity.vo.LoginVO;
+import com.lvyang.portal_service.entity.vo.MemberInfoVO;
 import com.lvyang.portal_service.entity.vo.RegisterVO;
 import com.lvyang.portal_service.service.PortalMemberService;
 import com.lvyang.service_base.exceptionhandler.ACourseException;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -71,6 +75,35 @@ public class PortalMemberController {
             e.printStackTrace();
             throw new ACourseException(20001,"获取登录信息失败");
         }
+    }
+
+    /**
+     * 实现用户id获取用户信息，返回用户信息对象
+     * @param Id
+     * @return
+     */
+    @ApiOperation(value = "实现用户id获取用户信息，返回用户信息JSON对象")
+    @PostMapping("getInfo/{Id}")
+    public JsonResultUnity getInfo(@PathVariable String Id) {
+        //根据用户id获取用户信息
+        PortalMember member = portalMemberService.getById(Id);
+        MemberInfoVO memberInfo = new MemberInfoVO();
+        BeanUtils.copyProperties(member,memberInfo);
+        return JsonResultUnity.correct().data("memberInfo",memberInfo);
+    }
+
+    /**
+     * 提供给其他服务用的用户信息查询功能
+     * @param Id
+     * @return
+     */
+    @ApiOperation(value="实现用户ID获取用户信息，返回用户信息对象")
+    @PostMapping("getMemberInfo/{Id}")
+    public MemberInfoVO getMemberInfo(@PathVariable String Id){
+        PortalMember member = portalMemberService.getById(Id);
+        MemberInfoVO memberInfo = new MemberInfoVO();
+        BeanUtils.copyProperties(member,memberInfo);
+        return memberInfo;
     }
 }
 

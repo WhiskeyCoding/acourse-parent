@@ -15,4 +15,5 @@ import java.util.List;
 public class TrainingVO {
     private String id;
     private String title;
+    private String videoSourceId;//视频Id
 }

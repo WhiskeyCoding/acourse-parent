@@ -2,6 +2,8 @@ package com.lvyang.vod_service.controller;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.service_base.exceptionhandler.ACourseException;
 import com.lvyang.vod_service.service.VodService;
@@ -74,5 +76,28 @@ public class VodController {
     public JsonResultUnity deleteBatch(@RequestParam("videoIdList") List<String> videoIdList) {
         vodService.removeMoreAlyVideo(videoIdList);
         return JsonResultUnity.correct();
+    }
+
+    /**
+     * 根据视频Id获取视频的阿里云Id
+     * @param videoId
+     * @return
+     */
+    @GetMapping("getPlayAuth/{videoId}")
+    public JsonResultUnity getPlayAuth(@PathVariable String videoId) {
+        try {
+            //创建初始化对象
+            DefaultAcsClient AliyunVodClient = InitVodClient.initVodClient(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET);
+            //创建获取凭证的Request对象和Response对象
+            GetVideoPlayAuthRequest getVideoPlayAuthRequest = new GetVideoPlayAuthRequest();
+            //向request对象里设置视频Id
+            getVideoPlayAuthRequest.setVideoId(videoId);
+            //调用方法得到凭证
+            GetVideoPlayAuthResponse acsResponse = AliyunVodClient.getAcsResponse(getVideoPlayAuthRequest);
+            String playAuth = acsResponse.getPlayAuth();
+            return JsonResultUnity.correct().data("playAuth", playAuth);
+        } catch (Exception e) {
+            throw new ACourseException(20001, "获取视频播放凭证失败");
+        }
     }
 }
