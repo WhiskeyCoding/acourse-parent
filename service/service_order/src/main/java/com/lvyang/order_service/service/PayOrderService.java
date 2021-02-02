@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PayOrderService extends IService<PayOrder> {
 
+    String createOrders(String courseId, String memberId);
 }

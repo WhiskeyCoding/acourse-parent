@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface PortalMemberMapper extends BaseMapper<PortalMember> {
 
+    Integer countRegisteredMemberByDay(String dayId);
 }

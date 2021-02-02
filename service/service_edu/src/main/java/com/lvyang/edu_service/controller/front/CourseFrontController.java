@@ -11,7 +11,6 @@ import com.lvyang.edu_service.service.EduCourseInfoService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 import java.util.Map;
@@ -34,15 +33,21 @@ public class CourseFrontController {
         this.courseChapterService = courseChapterService;
     }
 
-    //1 条件查询带分页查询课程
+    /**
+     * 条件查询带分页查询课程
+     * @param page 当前页
+     * @param limit 限制条数
+     * @param courseFrontVO courseFrontVO
+     * @return JsonResultUnity
+     */
     @PostMapping("getFrontCourseList/{page}/{limit}")
     public JsonResultUnity getFrontCourseList(@ApiParam(name = "page", value = "当前页码", required = true)
                                               @PathVariable Long page,
                                               @ApiParam(name = "limit", value = "每页记录数", required = true)
                                               @PathVariable Long limit,
-                                              @ApiParam(name = "courseQuery", value = "查询对象", required = false)
+                                              @ApiParam(name = "courseQuery", value = "查询对象")
                                               @RequestBody(required = false) CourseFrontVO courseFrontVO) {
-        Page<EduCourseInfo> pageParam = new Page<EduCourseInfo>(page, limit);
+        Page<EduCourseInfo> pageParam = new Page<>(page, limit);
         Map<String, Object> pageCourseMap = courseInfoService.getFrontCoursePageList(pageParam, courseFrontVO);
         if (pageCourseMap != null) {
             return JsonResultUnity.correct().data(pageCourseMap);
@@ -51,7 +56,11 @@ public class CourseFrontController {
         }
     }
 
-    //2 查询
+    /**
+     * 查询
+     * @param courseId 课程ID
+     * @return JsonResultUnity
+     */
     @GetMapping("getFrontCourseInfo/{courseId}")
     public JsonResultUnity getFrontCourseInfo(@PathVariable String courseId) {
         //根据课程Id，编写sql语句查询课程信息
@@ -60,5 +69,15 @@ public class CourseFrontController {
         List<ChapterVO> courseChapterTrainingInfo = courseChapterService.getCourseChapterTrainingByCourseId(courseId);
 
         return JsonResultUnity.correct().data("courseFrontShowVO", courseFrontShowVO).data("courseChapterTrainingInfo", courseChapterTrainingInfo);
+    }
+
+    /**
+     * 根据课程Id返回给订单
+     * @param courseId 课程ID
+     * @return CourseFrontShowVO
+     */
+    @PostMapping("getCourseIdForOrder/{courseId}")
+    public CourseFrontShowVO getCourseIdForOrder(@PathVariable String courseId) {
+        return courseInfoService.getCourseBaseInfo(courseId);
     }
 }

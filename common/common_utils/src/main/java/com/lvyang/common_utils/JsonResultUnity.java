@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * @Author: lvyang
- * @Description:
+ * @Description: 统一返回状态码
  * @Date: 2020/11/25 10:53
  * @Version: 1.0
  */
@@ -24,7 +24,7 @@ public class JsonResultUnity {
     private String message;
 
     @ApiModelProperty(value = "返回数据")
-    private Map<String, Object> data = new HashMap<String, Object>();
+    private Map<String, Object> data = new HashMap<>();
 
     /**链式编程*/
     private JsonResultUnity(){}

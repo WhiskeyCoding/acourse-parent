@@ -63,7 +63,7 @@ public class PortalMemberServiceImpl extends ServiceImpl<PortalMemberMapper, Por
         member.setMobile(registerVO.getMobile());
         member.setPassword(MD5.encrypt(password));
         member.setIsDisabled(false);
-        member.setAvatar("DEFAULT_AVATAR");
+        member.setAvatar("https://acourse.oss-cn-shanghai.aliyuncs.com/src-dev/DevAvatar/DefaultRegisterAvatar.png");
         member.setAge(0);
         member.setSex(0);
         member.setOpenid("DEFAULT_OPENID");
@@ -113,5 +113,10 @@ public class PortalMemberServiceImpl extends ServiceImpl<PortalMemberMapper, Por
         LoginInfoVO loginInfoVO = new LoginInfoVO();
         BeanUtils.copyProperties(member, loginInfoVO);
         return loginInfoVO;
+    }
+
+    @Override
+    public Integer countRegisteredMemberByDay(String dayId) {
+        return baseMapper.countRegisteredMemberByDay(dayId);
     }
 }

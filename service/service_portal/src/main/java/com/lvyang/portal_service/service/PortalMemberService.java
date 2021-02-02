@@ -21,4 +21,6 @@ public interface PortalMemberService extends IService<PortalMember> {
     String loginMember(LoginVO loginVO);
 
     LoginInfoVO getLoginInfo(String memberId);
+
+    Integer countRegisteredMemberByDay(String dayId);
 }
