@@ -7,6 +7,7 @@ import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.lvyang.edu_service.entity.EduTeacher;
 import com.lvyang.edu_service.service.EduCourseInfoService;
 import com.lvyang.edu_service.service.EduTeacherService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,8 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/edu_service/teacherfront")
-@CrossOrigin
+@Api(tags = {"09-Front Teacher Management"})
+//@CrossOrigin
 public class TeacherFrontController {
     final EduTeacherService eduTeacherService;
     final EduCourseInfoService eduCourseInfoService;

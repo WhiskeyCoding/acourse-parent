@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/order_service/pay-paylog")
-@CrossOrigin
+//@CrossOrigin
 public class PayPaylogController {
 
 }

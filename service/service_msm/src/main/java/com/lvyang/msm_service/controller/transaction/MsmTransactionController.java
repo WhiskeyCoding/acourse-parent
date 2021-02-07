@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 @RequestMapping("/msm_service/msm_transaction")
-@CrossOrigin
+//@CrossOrigin
 public class MsmTransactionController {
 
     final MsmTransactionService msmTransactionService;

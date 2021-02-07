@@ -6,11 +6,13 @@ import com.lvyang.edu_service.entity.subject.OneSubject;
 import com.lvyang.edu_service.service.EduSubjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,12 +23,12 @@ import java.util.List;
  * @author lvyang
  * @since 2020-12-08
  */
-@Api(tags = {"课程科目引入"})
 @RestController
 @RequestMapping("/edu_service/subject")
-@CrossOrigin
+@Api(tags = {"02-Introduction Of Course Subjects"})
+//@CrossOrigin
 public class EduSubjectController {
-    @Autowired
+    @Resource
     private EduSubjectService subjectService;
 
     //添加课程分类

@@ -26,10 +26,11 @@ import java.util.List;
  * @author lvyang
  * @since 2020-11-25
  */
-@Api(tags = {"讲师管理"})
+
 @RestController
 @RequestMapping("/edu_service/teacher")
-@CrossOrigin
+@Api(tags = {"01-Teacher Management"})
+//@CrossOrigin
 public class EduTeacherController {
 
     /**

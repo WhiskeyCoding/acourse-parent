@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/order_service/pay-order")
-@CrossOrigin
+//@CrossOrigin
 public class PayOrderController {
     @Autowired
     private PayOrderService payOrderService;

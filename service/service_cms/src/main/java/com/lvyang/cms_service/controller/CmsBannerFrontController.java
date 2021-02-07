@@ -1,15 +1,13 @@
 package com.lvyang.cms_service.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lvyang.cms_service.entity.CmsBanner;
 import com.lvyang.cms_service.service.CmsBannerService;
 import com.lvyang.common_utils.JsonResultUnity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,17 +16,13 @@ import java.util.List;
  * @Date: 2020/12/20 13:49
  * @Version: 1.0
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/cms_service/cms_banner_front")
 public class CmsBannerFrontController {
 
-    final CmsBannerService cmsBannerService;
-
-    @Autowired
-    private CmsBannerFrontController(CmsBannerService cmsBannerService) {
-        this.cmsBannerService = cmsBannerService;
-    }
+    @Resource
+    private CmsBannerService cmsBannerService;
 
     /**
      * 查询所有的Banner

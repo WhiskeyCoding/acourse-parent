@@ -3,12 +3,12 @@ package com.lvyang.oss_service.controller;
 import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.oss_service.service.OssService;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 
 /**
  * @Author: lvyang
@@ -18,12 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Api(tags = {"阿里云OSS上传管理"})
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/oss_service/ossFile")
 public class OssController {
-    @Autowired
+    @Resource
     private OssService ossService;
 
+    //上传头像的方法
     @PostMapping
     public JsonResultUnity uploadOssFile(MultipartFile file){
         String url = ossService.uploadFileAvatar(file);

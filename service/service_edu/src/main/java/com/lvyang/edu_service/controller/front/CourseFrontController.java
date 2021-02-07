@@ -8,6 +8,7 @@ import com.lvyang.edu_service.entity.vo.CourseFrontShowVO;
 import com.lvyang.edu_service.entity.vo.CourseFrontVO;
 import com.lvyang.edu_service.service.EduCourseChapterService;
 import com.lvyang.edu_service.service.EduCourseInfoService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/edu_service/coursefront")
-@CrossOrigin
+@Api(tags = {"08-Front Course Management"})
+//@CrossOrigin
 public class CourseFrontController {
     final EduCourseInfoService courseInfoService;
     final EduCourseChapterService courseChapterService;

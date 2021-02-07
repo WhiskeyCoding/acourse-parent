@@ -3,9 +3,9 @@ package com.lvyang.statistics_service.controller;
 
 import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.statistics_service.service.StatisticsDailyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -18,9 +18,9 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/statistics_service/statistics_daily")
-@CrossOrigin
+//@CrossOrigin
 public class StatisticsDailyController {
-    @Autowired
+    @Resource
     private StatisticsDailyService statisticsDailyService;
 
     /**

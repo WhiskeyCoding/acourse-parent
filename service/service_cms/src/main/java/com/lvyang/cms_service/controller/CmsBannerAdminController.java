@@ -5,11 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvyang.cms_service.entity.CmsBanner;
 import com.lvyang.cms_service.service.CmsBannerService;
 import com.lvyang.common_utils.JsonResultUnity;
-
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,12 +21,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/cms_service/cms_banner_admin")
-@CrossOrigin
+//@CrossOrigin
 public class CmsBannerAdminController {
     /**
      * 注入CmsBannerService服务
      */
-    @Autowired
+    @Resource
     private CmsBannerService cmsBannerService;
 
     /**

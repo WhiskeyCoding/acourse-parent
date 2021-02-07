@@ -5,6 +5,7 @@ import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.edu_service.entity.EduCourseChapter;
 import com.lvyang.edu_service.entity.cchapter.ChapterVO;
 import com.lvyang.edu_service.service.EduCourseChapterService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -19,7 +20,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/edu_service/edu_course_chapter")
-@CrossOrigin
+@Api(tags = {"05-Course Chapter Management"})
+//@CrossOrigin
 public class EduCourseChapterController {
     /** EduCourseChapterService 服务注入 */
     @Autowired

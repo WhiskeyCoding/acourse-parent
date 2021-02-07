@@ -26,7 +26,7 @@ public class EduCourseTrainingServiceImpl extends ServiceImpl<EduCourseTrainingM
     @Autowired
     private VodClient vodClient;
     /**根据课程id删除小节*/
-    //TODO 删除小节，删除对应视频文件
+    //删除小节，删除对应视频文件
     @Override
     public void removeTrainingByCourseId(String courseId) {
 

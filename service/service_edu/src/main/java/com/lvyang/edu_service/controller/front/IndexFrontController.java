@@ -6,8 +6,8 @@ import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.lvyang.edu_service.entity.EduTeacher;
 import com.lvyang.edu_service.service.EduCourseInfoService;
 import com.lvyang.edu_service.service.EduTeacherService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +20,10 @@ import java.util.List;
  * @Date: 2021/1/15 11:20
  * @Version: 1.0
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/edu_service/indexfront")
+@Api(tags = {"07-Front Index Management"})
 public class IndexFrontController {
 
     final EduCourseInfoService eduCourseInfoService;

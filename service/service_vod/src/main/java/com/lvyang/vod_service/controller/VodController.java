@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Api(tags = {"阿里云Vod上传管理"})
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/vod_service/vodFile")
 public class VodController {
     @Autowired

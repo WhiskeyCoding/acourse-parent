@@ -9,8 +9,10 @@ import com.lvyang.edu_service.entity.vo.CourseInfoVO;
 import com.lvyang.edu_service.entity.vo.CoursePublishVO;
 import com.lvyang.edu_service.entity.vo.CourseQuery;
 import com.lvyang.edu_service.service.EduCourseInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -24,16 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/edu_service/edu_course_info")
-@CrossOrigin
+@Api(tags = {"04-Course Info Management"})
+//@CrossOrigin
 public class EduCourseInfoController {
     /**
      * 服务注入
      */
-    private final EduCourseInfoService eduCourseInfoService;
-    @Autowired
-    public EduCourseInfoController (EduCourseInfoService eduCourseInfoService){
-        this.eduCourseInfoService = eduCourseInfoService;
-    }
+    @Resource
+    private EduCourseInfoService eduCourseInfoService;
     
     /**
      *添加课程基本信息

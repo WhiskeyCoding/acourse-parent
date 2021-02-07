@@ -8,9 +8,9 @@ import com.lvyang.statistics_service.mapper.StatisticsDailyMapper;
 import com.lvyang.statistics_service.nacosclient.PortalClient;
 import com.lvyang.statistics_service.service.StatisticsDailyService;
 import org.apache.commons.lang3.RandomUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.Map;
 @Service
 public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMapper, StatisticsDaily> implements StatisticsDailyService {
 
-    @Autowired
+    @Resource
     private PortalClient portalClient;
     @Override
     public void countMemberRegistered(String dayId) {

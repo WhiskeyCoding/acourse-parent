@@ -5,9 +5,11 @@ import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.edu_service.entity.EduCourseTraining;
 import com.lvyang.edu_service.nacosclient.VodClient;
 import com.lvyang.edu_service.service.EduCourseTrainingService;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -19,19 +21,20 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/edu_service/edu_course_training")
-@CrossOrigin
+@Api(tags = {"06-Course Training And Video Management"})
+//@CrossOrigin
 public class EduCourseTrainingController {
 
     /**
      * 服务注入
      */
-    @Autowired
+    @Resource
     private EduCourseTrainingService eduCourseTrainingService;
 
     /**
      * 注入服务中心的远程调用别的微服务
      */
-    @Autowired
+    @Resource
     private VodClient vodClient;
 
 

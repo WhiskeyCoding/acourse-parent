@@ -7,11 +7,10 @@ import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.common_utils.jwtutil.JwtUtils;
 import com.lvyang.common_utils.voutil.MemberInfoVO;
 import com.lvyang.edu_service.entity.EduUserComment;
-import com.lvyang.edu_service.entity.vo.CommentQueryVO;
 import com.lvyang.edu_service.nacosclient.PortalClient;
 import com.lvyang.edu_service.service.EduUserCommentService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,8 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/edu_service/edu_user_comment")
-@CrossOrigin
+@Api(tags = {"10-User Comment Management"})
+//@CrossOrigin
 public class EduUserCommentController {
     @Autowired
     private EduUserCommentService eduUserCommentService;

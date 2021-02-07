@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -28,7 +29,8 @@ public class SwaggerConfig {
                 .groupName("webApi")
                 .apiInfo(webApiInfo())
                 .select()
-                .paths(Predicates.not(PathSelectors.regex("/admin/.*")))
+                .apis(RequestHandlerSelectors.any())
+                //.paths(Predicates.not(PathSelectors.regex("/admin/.*")))//解决隐藏前面有admin的接口
                 .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build();
 
@@ -37,10 +39,10 @@ public class SwaggerConfig {
     private ApiInfo webApiInfo(){
 
         return new ApiInfoBuilder()
-                .title("API Documentation For 在线教育课程产品_A课程")
-                .description("本文档描述微服务接口定义")
-                .version("1.0")
+                .title("API Documentation For Acourse")
+                .description("This document describes the microservice interface definition.")
                 .contact(new Contact("lvyang", "http://www.lvyang.club", "lvyangcode@163.com"))
+                .version("1.0.0")
                 .build();
     }
 }

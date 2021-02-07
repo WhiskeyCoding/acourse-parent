@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/portal_service/portal_member")
-@CrossOrigin
+//@CrossOrigin
 public class PortalMemberController {
     /**
      * 引入服务类型名称
