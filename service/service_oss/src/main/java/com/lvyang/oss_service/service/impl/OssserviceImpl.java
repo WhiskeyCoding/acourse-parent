@@ -27,15 +27,12 @@ public class OssserviceImpl implements OssService {
         String accessKeyId = ConstantPropertiesUtils.ACCESS_KEY_ID;
         String accessKeySecret = ConstantPropertiesUtils.ACCESS_KEY_SECRET;
         String bucketName = ConstantPropertiesUtils.BUCKET_NAME;
-
         try{
             // 创建OSSClient实例。
             OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-
             // 上传文件流。
             InputStream inputStream = file.getInputStream();
             String originalFilename = file.getOriginalFilename();
-
             //1在文件中生成唯一值,防止文件被覆盖
             String ossFileId = UUID.randomUUID().toString().replace("-", "");
             //2文件分类
@@ -43,15 +40,11 @@ public class OssserviceImpl implements OssService {
             String ossFileName = "file_"+ossFileTime+"_"+ossFileId+"_"+originalFilename;
             //oss参数，第一个，bucket名字，第二个，文件的原始名字，第三个文件流
             ossClient.putObject(bucketName, ossFileName, inputStream);
-
             // 关闭OSSClient。
             ossClient.shutdown();
-
-
             //上传文件路径返回
             String urlOfOssFile = "https://"+bucketName+"."+endpoint+"/"+ossFileName;
             return urlOfOssFile;
-
         }catch (Exception e){
             e.printStackTrace();
             return null;

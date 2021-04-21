@@ -1,7 +1,5 @@
 package com.lvyang.portal_service.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -30,7 +28,7 @@ public class LoginInfoVO {
     private String mobile;
 
     @ApiModelProperty(value = "性别 1 女，2 男")
-    private Integer sex;
+    private String sex;
 
     @ApiModelProperty(value = "年龄")
     private Integer age;

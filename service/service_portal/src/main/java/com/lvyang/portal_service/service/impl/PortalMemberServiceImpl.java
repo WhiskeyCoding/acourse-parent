@@ -1,6 +1,7 @@
 package com.lvyang.portal_service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvyang.common_utils.jwtutil.JwtUtils;
 import com.lvyang.common_utils.md5util.MD5;
 import com.lvyang.portal_service.entity.PortalMember;
@@ -9,13 +10,12 @@ import com.lvyang.portal_service.entity.vo.LoginVO;
 import com.lvyang.portal_service.entity.vo.RegisterVO;
 import com.lvyang.portal_service.mapper.PortalMemberMapper;
 import com.lvyang.portal_service.service.PortalMemberService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvyang.service_base.exceptionhandler.ACourseException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.data.redis.core.RedisTemplate;
 /**
  * <p>
  * 会员表 服务实现类
@@ -28,6 +28,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class PortalMemberServiceImpl extends ServiceImpl<PortalMemberMapper, PortalMember> implements PortalMemberService {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    //注入用户信息的Member
+    @Autowired
+    private PortalMemberService portalMemberService;
+
 
     @Override
     public void registerMember(RegisterVO registerVO) {
@@ -65,7 +70,7 @@ public class PortalMemberServiceImpl extends ServiceImpl<PortalMemberMapper, Por
         member.setIsDisabled(false);
         member.setAvatar("https://acourse.oss-cn-shanghai.aliyuncs.com/src-dev/DevAvatar/DefaultRegisterAvatar.png");
         member.setAge(0);
-        member.setSex(0);
+        member.setSex("0");
         member.setOpenid("DEFAULT_OPENID");
         member.setSign("DEFAULT_SIGN");
         this.save(member);
@@ -118,5 +123,13 @@ public class PortalMemberServiceImpl extends ServiceImpl<PortalMemberMapper, Por
     @Override
     public Integer countRegisteredMemberByDay(String dayId) {
         return baseMapper.countRegisteredMemberByDay(dayId);
+    }
+
+    @Override
+    public void removeMember(String memberId) {
+        int result = baseMapper.deleteById(memberId);
+        if (result == 0) {
+            throw new ACourseException(20001, "删除失败");
+        }
     }
 }

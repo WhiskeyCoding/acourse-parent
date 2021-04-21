@@ -4,8 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @Author: lvyang
  * @Description:
@@ -25,7 +23,7 @@ public class MemberInfoVO {
     private String mobile;
 
     @ApiModelProperty(value = "性别 1 女，2 男")
-    private Integer sex;
+    private String sex;
 
     @ApiModelProperty(value = "年龄")
     private Integer age;

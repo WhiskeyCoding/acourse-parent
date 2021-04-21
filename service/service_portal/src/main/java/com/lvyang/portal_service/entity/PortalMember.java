@@ -1,17 +1,14 @@
 package com.lvyang.portal_service.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -46,7 +43,7 @@ public class PortalMember implements Serializable {
     private String nickname;
 
     @ApiModelProperty(value = "性别 1 女，2 男")
-    private Integer sex;
+    private String sex;
 
     @ApiModelProperty(value = "年龄")
     private Integer age;
@@ -61,6 +58,7 @@ public class PortalMember implements Serializable {
     private Boolean isDisabled;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
+    @TableLogic
     private Boolean isDeleted;
 
     @ApiModelProperty(value = "创建时间")

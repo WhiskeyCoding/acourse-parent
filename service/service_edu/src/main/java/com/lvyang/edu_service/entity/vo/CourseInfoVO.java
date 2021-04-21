@@ -1,9 +1,6 @@
 package com.lvyang.edu_service.entity.vo;
 
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -44,4 +41,10 @@ public class CourseInfoVO {
 
     @ApiModelProperty(value = "课程简介")
     private String description;
+
+    @ApiModelProperty(value = "课程状态 Draft未发布  Normal已发布")
+    private String status;
+
+    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
+    private Integer isDeleted;
 }

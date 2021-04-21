@@ -51,7 +51,6 @@ public class EduCourseChapterServiceImpl extends ServiceImpl<EduCourseChapterMap
             ChapterVO chapterVO = new ChapterVO();
             BeanUtils.copyProperties(eduCourseChapter,chapterVO);
             finalList.add(chapterVO);
-
             //4.遍历查询小节List集合进行封装
             List<TrainingVO> trainingVOList = new ArrayList<>();
             for (int j = 0; j < eduCourseTrainingList.size(); j++) {

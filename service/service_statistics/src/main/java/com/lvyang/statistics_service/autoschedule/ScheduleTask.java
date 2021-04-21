@@ -20,11 +20,11 @@ public class ScheduleTask {
     @Autowired
     private StatisticsDailyService statisticsDailyService;
     /**
-     * 测试 每天七点到二十三点每五秒执行一次
+     * 测试 每隔60秒执行一次
      */
-    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "0/60 * * * * ?")
     public void task1() {
-        System.out.println("每隔30秒执行一次。");
+        System.out.println("Schedule Task Per 60Seconds。");
     }
 
     /**
@@ -34,7 +34,7 @@ public class ScheduleTask {
     public void taskOfStatistics(){
         String theDayBefore = DateUtil.formatDate(DateUtil.addDays(new Date(), -1));
         statisticsDailyService.countMemberRegistered(theDayBefore);
-        System.out.println("每天2000的时间中把前一天的数据进行查询添加");
+        System.out.println("The data of the previous day will be queried and added in 2000 hours every day");
     }
 
 }

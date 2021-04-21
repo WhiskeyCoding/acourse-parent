@@ -1,13 +1,14 @@
 package com.lvyang.edu_service.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.lvyang.edu_service.entity.vo.CourseFrontShowVO;
 import com.lvyang.edu_service.entity.vo.CourseFrontVO;
 import com.lvyang.edu_service.entity.vo.CourseInfoVO;
 import com.lvyang.edu_service.entity.vo.CoursePublishVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,4 +37,7 @@ public interface EduCourseInfoService extends IService<EduCourseInfo> {
     Map<String, Object> getFrontCoursePageList(Page<EduCourseInfo> pageParam, CourseFrontVO courseFrontVO);
 
     CourseFrontShowVO getCourseBaseInfo(String courseId);
+
+
+    List<EduCourseInfo> getRecommendCourseList(String memberId) throws Exception;
 }

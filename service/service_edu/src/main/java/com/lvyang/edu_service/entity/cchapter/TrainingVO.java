@@ -2,9 +2,6 @@ package com.lvyang.edu_service.entity.cchapter;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Author: lvyang
  * @Description:
@@ -16,4 +13,5 @@ public class TrainingVO {
     private String id;
     private String title;
     private String videoSourceId;//视频Id
+    private Boolean isFree;
 }

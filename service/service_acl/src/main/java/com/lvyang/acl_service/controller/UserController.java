@@ -59,9 +59,11 @@ public class UserController {
         if(!StringUtils.isEmpty(userQueryVo.getUsername())) {
             wrapper.like("username",userQueryVo.getUsername());
         }
-
+        userService.page(pageParam, wrapper);
+        long total = pageParam.getTotal();
         IPage<User> pageModel = userService.page(pageParam, wrapper);
-        return JsonResultUnity.correct().data("items", pageModel.getRecords()).data("total", pageModel.getTotal());
+
+        return JsonResultUnity.correct().data("items", pageModel.getRecords()).data("total", total);
     }
 
     @ApiOperation(value = "新增管理用户")

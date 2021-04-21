@@ -38,7 +38,13 @@ public class EduUserCommentController {
     @Autowired
     private PortalClient portalClient;
 
-    //根据课程id查询评论列表
+    /**
+     * 分页查询评论
+     * @param current
+     * @param limit
+     * @param courseId
+     * @return
+     */
     @ApiOperation(value = "评论分页列表")
     @GetMapping("pageQueryComment/{current}/{limit}")
     public JsonResultUnity pageQueryComment(@PathVariable Long current, @PathVariable Long limit, @RequestParam(required = false) String courseId) {
@@ -47,7 +53,6 @@ public class EduUserCommentController {
         wrapper.eq("course_id",courseId);
         eduUserCommentService.page(pageParam,wrapper);
         List<EduUserComment> commentList = pageParam.getRecords();
-
         Map<String, Object> map = new HashMap<>();
         map.put("comments", commentList);
         map.put("current", pageParam.getCurrent());
@@ -56,7 +61,6 @@ public class EduUserCommentController {
         map.put("total", pageParam.getTotal());
         map.put("hasNext", pageParam.hasNext());
         map.put("hasPrevious", pageParam.hasPrevious());
-
         return JsonResultUnity.correct().data(map);
     }
 
@@ -68,12 +72,9 @@ public class EduUserCommentController {
             return JsonResultUnity.error().code(28004).message("请登录");
         }
         eduUserComment.setMemberId(memberId);
-
         MemberInfoVO memberInfo = portalClient.getMemberInfo(memberId);
-
         eduUserComment.setNickname(memberInfo.getNickname());
         eduUserComment.setAvatar(memberInfo.getAvatar());
-
         eduUserCommentService.save(eduUserComment);
         return JsonResultUnity.correct();
     }

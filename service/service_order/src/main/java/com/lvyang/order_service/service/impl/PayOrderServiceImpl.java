@@ -10,6 +10,7 @@ import com.lvyang.order_service.nacosclient.EduClient;
 import com.lvyang.order_service.nacosclient.PortalClient;
 import com.lvyang.order_service.service.PayOrderService;
 import com.lvyang.order_service.utils.OrderNoUtil;
+import com.lvyang.service_base.exceptionhandler.ACourseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +59,11 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
         return orderNo;
     }
 
-
+    @Override
+    public void removeOrder(String id) {
+        int result = baseMapper.deleteById(id);
+        if (result == 0) {
+            throw new ACourseException(20001, "删除失败");
+        }
+    }
 }

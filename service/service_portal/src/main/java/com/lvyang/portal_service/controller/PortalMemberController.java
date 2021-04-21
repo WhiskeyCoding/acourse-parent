@@ -1,6 +1,7 @@
 package com.lvyang.portal_service.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvyang.common_utils.JsonResultUnity;
 import com.lvyang.common_utils.jwtutil.JwtUtils;
 import com.lvyang.portal_service.entity.PortalMember;
@@ -17,6 +18,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -121,6 +123,27 @@ public class PortalMemberController {
 
 
     /**
+     * 实现查询所有用户信息
+     * @return
+     */
+    @ApiOperation(value="实现查询所有用户信息")
+    @GetMapping("getAllMemberInfo")
+    public JsonResultUnity getAllMemberInfo(){
+        List<PortalMember> membersList = portalMemberService.list(null);
+        return JsonResultUnity.correct().data("allUserMemeber",membersList);
+    }
+
+    @ApiOperation(value = "分页查询用户列表信息")
+    @GetMapping("paginationQueryToMember/{current}/{limit}")
+    public JsonResultUnity paginationQueryToMember(@PathVariable long current, @PathVariable long limit) {
+        Page<PortalMember> memberPage = new Page<>(current, limit);
+        portalMemberService.page(memberPage, null);
+        long total = memberPage.getTotal();
+        List<PortalMember> records = memberPage.getRecords();
+        return JsonResultUnity.correct().data("total", total).data("records", records);
+    }
+
+   /**
      * 6.根据Id获取用户信息返回给Order
      * @param memberId 用户Id
      * @return MemberInfoVO
@@ -137,6 +160,37 @@ public class PortalMemberController {
     public JsonResultUnity countRegisteredMember(@PathVariable String dayId){
         Integer enrollmentOneDay = portalMemberService.countRegisteredMemberByDay(dayId);
         return JsonResultUnity.correct().data("enrollmentOneDay", enrollmentOneDay);
+    }
+
+
+    /**
+     * 根据用户信息编号逻辑删除
+     */
+    @ApiOperation(value = "根据用户信息ID逻辑删除")
+    @DeleteMapping("deleteLogicallyById/{id}")
+    public JsonResultUnity deleteMemberLogicallyById(@PathVariable String id) {
+        PortalMember member = portalMemberService.getById(id);
+        if (member.getIsDeleted() == false) {
+            portalMemberService.removeById(id);
+            return JsonResultUnity.correct();
+        }else{
+            return JsonResultUnity.error();
+        }
+    }
+
+    /**
+     * 修改用户信息
+     *
+     */
+    @ApiOperation(value = "修改用户信息")
+    @PutMapping("updateMemberInfo")
+    public JsonResultUnity updateMemberInfo(@RequestBody PortalMember member) {
+        boolean flag = portalMemberService.updateById(member);
+        if (flag) {
+            return JsonResultUnity.correct();
+        }else {
+            return JsonResultUnity.error();
+        }
     }
 }
 

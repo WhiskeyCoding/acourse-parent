@@ -1,6 +1,5 @@
 package com.lvyang.order_service;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.lvyang"})
-@MapperScan("com.lvyang.order_service.mapper")
+//@MapperScan("com.lvyang.order_service.mapper")
 @EnableDiscoveryClient//nacos服务中心注册,远程调用
 @EnableFeignClients//Feign服务调用
 public class OrderApplication {

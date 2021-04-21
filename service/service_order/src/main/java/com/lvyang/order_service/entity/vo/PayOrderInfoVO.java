@@ -1,35 +1,21 @@
-package com.lvyang.order_service.entity;
+package com.lvyang.order_service.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
- * <p>
- * 订单
- * </p>
- *
- * @author lvyang
- * @since 2021-02-01
+ * @Author: lvyang
+ * @Description:
+ * @Date: 2021/4/16 12:42
+ * @Version: 1.0
  */
+
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@ApiModel(value="PayOrder对象", description="订单")
-public class PayOrder implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.ID_WORKER_STR)
-    private String id;
-
+@ApiModel(value="PayOrder对象信息", description="PayOrder对象信息")
+public class PayOrderInfoVO {
     @ApiModelProperty(value = "订单号")
     private String orderNo;
 
@@ -62,18 +48,4 @@ public class PayOrder implements Serializable {
 
     @ApiModelProperty(value = "订单状态（0：未支付 1：已支付）")
     private Integer status;
-
-    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableLogic
-    private Boolean isDeleted;
-
-    @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date gmtCreate;
-
-    @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date gmtModified;
-
-
 }

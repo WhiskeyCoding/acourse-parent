@@ -2,6 +2,8 @@ package com.lvyang.edu_service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lvyang.common_utils.ItemCF.ItemCFRecommender;
 import com.lvyang.edu_service.entity.EduCourseDescription;
 import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.lvyang.edu_service.entity.vo.CourseFrontShowVO;
@@ -12,14 +14,12 @@ import com.lvyang.edu_service.mapper.EduCourseInfoMapper;
 import com.lvyang.edu_service.service.EduCourseChapterService;
 import com.lvyang.edu_service.service.EduCourseDescriptionService;
 import com.lvyang.edu_service.service.EduCourseInfoService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvyang.edu_service.service.EduCourseTrainingService;
 import com.lvyang.service_base.exceptionhandler.ACourseException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,12 +39,14 @@ public class EduCourseInfoServiceImpl extends ServiceImpl<EduCourseInfoMapper, E
     //课程描述注入
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
-
     //注入小节、章节的
     @Autowired
     private EduCourseChapterService eduCourseChapterService;
     @Autowired
     private EduCourseTrainingService eduCourseTrainingService;
+    //注入课程概要的
+    @Autowired
+    private EduCourseInfoService eduCourseInfoService;
 
     //添加课程基本信息方法实现
     @Override
@@ -52,9 +54,10 @@ public class EduCourseInfoServiceImpl extends ServiceImpl<EduCourseInfoMapper, E
         //1 向课程表添加基本信息
         //CourseInfoVO->转换成EduCourseInfo
         EduCourseInfo eduCourseInfo = new EduCourseInfo();
+        eduCourseInfo.setIsDeleted(0);
+        eduCourseInfo.setStatus("Normal");
         BeanUtils.copyProperties(courseInfoVO, eduCourseInfo);
         int insert = baseMapper.insert(eduCourseInfo);//影响行数
-        eduCourseInfo.setIsDeleted(0);
         if (insert == 0) {
             //添加失败
             throw new ACourseException(20001, "添加课程信息失败");
@@ -177,6 +180,32 @@ public class EduCourseInfoServiceImpl extends ServiceImpl<EduCourseInfoMapper, E
     public CourseFrontShowVO getCourseBaseInfo(String courseId) {
         CourseFrontShowVO courseBaseInfo = baseMapper.getCourseBaseInfo(courseId);
         return courseBaseInfo;
+    }
+
+    @Override
+    public List<EduCourseInfo> getRecommendCourseList(String memberId) throws Exception{
+        if (StringUtils.isEmpty(memberId)) {
+            //推荐列表前三个
+            QueryWrapper<EduCourseInfo> noMemberWrapper = new QueryWrapper<>();
+            noMemberWrapper.orderByAsc("id");
+            noMemberWrapper.last("limit 3");
+            List<EduCourseInfo> noMemberRecommendCourseList = eduCourseInfoService.list(noMemberWrapper);
+            return noMemberRecommendCourseList;
+        } else {
+            //根据memberId进行推荐
+            List<String> courseIdList = ItemCFRecommender.getRecommend(memberId);
+            if (courseIdList.isEmpty() || courseIdList.size() < 3) {
+                QueryWrapper<EduCourseInfo> noMemberWrapper = new QueryWrapper<>();
+                noMemberWrapper.orderByAsc("id");
+                noMemberWrapper.last("limit 3");
+                List<EduCourseInfo> noMemberRecommendCourseList = eduCourseInfoService.list(noMemberWrapper);
+                return noMemberRecommendCourseList;
+            } else {
+                //根据列表courseIdList中的多条ID值查询每条课程信息
+                List<EduCourseInfo> memberRecommendCourseList = baseMapper.selectBatchIds(courseIdList);
+                return memberRecommendCourseList;
+            }
+        }
     }
 
 }

@@ -2,16 +2,19 @@ package com.lvyang.edu_service.controller.front;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lvyang.common_utils.JsonResultUnity;
+import com.lvyang.common_utils.jwtutil.JwtUtils;
 import com.lvyang.edu_service.entity.EduCourseInfo;
 import com.lvyang.edu_service.entity.EduTeacher;
 import com.lvyang.edu_service.service.EduCourseInfoService;
 import com.lvyang.edu_service.service.EduTeacherService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -55,9 +58,15 @@ public class IndexFrontController {
         return JsonResultUnity.correct().data("indexCourseList",indexCourseList).data("indexTeacherList",indexTeacherList);
 
     }
+
     /**
-     *
+     * 根据用户ID和课程订单情况，输入用户ID，给出推荐信息
      */
-
-
+    @ApiOperation(value = "根据用户ID和课程订单情况，输入用户ID，给出推荐信息")
+    @GetMapping("recommendedCourseByMemberId")
+    public JsonResultUnity recommendedCourseByMemberId(HttpServletRequest request) throws Exception{
+        String memberId = JwtUtils.getMemberIdByJwtToken(request);
+        List<EduCourseInfo> recommendCourseList = eduCourseInfoService.getRecommendCourseList(memberId);
+        return JsonResultUnity.correct().data("recommendCourseList", recommendCourseList);
+    }
 }

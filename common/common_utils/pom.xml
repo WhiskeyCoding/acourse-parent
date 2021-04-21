@@ -25,5 +25,15 @@
             <artifactId>jjwt</artifactId>
         </dependency>
         <!--End JWT-->
+        <!--Start Mahout-->
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-math</artifactId>
+        </dependency>
+        <!--End Mahout-->
     </dependencies>
 </project>

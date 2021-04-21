@@ -82,8 +82,12 @@ public class CmsBannerAdminController {
     @ApiOperation(value = "修改Banner")
     @PutMapping("updateBanner")
     public JsonResultUnity updateBanner(@RequestBody CmsBanner cmsBanner) {
-        cmsBannerService.updateById(cmsBanner);
-        return JsonResultUnity.correct();
+        boolean flag = cmsBannerService.updateById(cmsBanner);
+        if (flag) {
+            return JsonResultUnity.correct();
+        }else {
+            return JsonResultUnity.error();
+        }
     }
 
     /**

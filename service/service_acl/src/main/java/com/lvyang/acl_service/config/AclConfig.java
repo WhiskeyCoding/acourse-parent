@@ -1,4 +1,4 @@
-package com.lvyang.portal_service.config;
+package com.lvyang.acl_service.config;
 
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @Author: lvyang
  * @Description:
- * @Date: 2021/1/20 1:34
+ * @Date: 2021/2/8 22:58
  * @Version: 1.0
  */
 @Configuration
-@MapperScan("com.lvyang.portal_service.mapper")
-public class PortalConfig {
+@MapperScan("com.lvyang.acl_service.mapper")
+public class AclConfig {
     /**逻辑删除插件*/
     @Bean
     public ISqlInjector sqlInjector() {
