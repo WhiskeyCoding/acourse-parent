@@ -22,17 +22,15 @@ import java.util.List;
  * @Version: 1.0
  */
 public class ItemCFRecommender {
-
     final static int RECOMMENDER_NUM = 3;
     public static List<String> getRecommend(String memberId) throws IOException, TasteException {
         List<String> recommendCourseIdList = new ArrayList<>();
-        String file = "D:\\Project\\CFTest\\statistics_course_rate.csv";
+        String file = "D:\\AcoursePath\\CFTest\\statistics_course_rate.csv";
         DataModel model = new FileDataModel(new File(file));
         ItemSimilarity item = new EuclideanDistanceSimilarity(model);
         Recommender recommender = new GenericItemBasedRecommender(model, item);
         LongPrimitiveIterator iter = model.getUserIDs();
         long resultId = Long.parseLong(memberId);;
-        //获取推荐结果
         List<RecommendedItem> list = recommender.recommend(resultId, RECOMMENDER_NUM);
         for (RecommendedItem ritem : list) {
             Long courseitemId = ritem.getItemID();
